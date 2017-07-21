@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"  "F://struts_dtd/struts-2.0.dtd">
+<struts>
+
+	<package name="default" extends="struts-default">
+
+		<!-- 为了实现用户登录状态安全验证，而添加的拦截器 -->
+		<interceptors>
+			<!--定义一个名为authority的拦截器 -->
+			<interceptor class="com.dist.common.MyInterceptor" name="authority" />
+			<!--定义一个包含权限检查的拦截器栈 -->
+			<interceptor-stack name="mydefault">
+				<!--配置内建默认拦截器 -->
+				<interceptor-ref name="defaultStack" />
+				<!--配置自定义的拦截器 -->
+				<interceptor-ref name="authority" />
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="mydefault" />
+
+
+		<global-results>
+			<result name="success">/index.html</result>
+			<result name="error">/error.jsp</result>
+		</global-results>
+
+	</package>
+
+
+
+
+
+
+
+	<package name="freemarker" namespace="/" extends="default">
+		<global-results>
+			<result type="freemarker" />
+		</global-results>
+
+	</package>
+
+
+	<!-- 设备模块部分路径配置 -->
+	<package name="device" namespace="/" extends="default">
+		<action name="device" class="com.dist.action.DeviceAction"
+			method="deviceService">
+			<result name="delete" type="redirect">/device!index.action</result>
+		</action>
+	</package>
+
+
+	<package name="applicationPlatform" namespace="/" extends="default">
+		<action name="applicationPlatform" class="com.dist.action.ApplicationPlatformAction"
+			method="save">
+			<result name="success" type="redirect">/applications!list.action?app.id=${app.getSApplications().getId()} </result>
+		</action>
+	</package>
+	
+
+	<package name="applications" namespace="/" extends="default">
+		<action name="applications" class="com.dist.action.ApplicationsAction"
+			method="updateApp">
+			<result name="success" type="redirect">/applications!list.action?app.id=${app.getId()} </result>
+		</action>
+	</package>
+
+
+	<!-- 用户模块部分路径配置 -->
+	<package name="user" namespace="/" extends="default">
+		<action name="user" class="com.dist.action.UserAction" method="login">
+			<interceptor-ref name="defaultStack">
+				<param name="excludeMethods">login</param>
+			</interceptor-ref>
+			<result name="success" type="redirect">/dashboard!index.action</result>
+			<result name="setsuccess" type="redirect">/index.html</result>
+		</action>
+	</package>
+	
+	<!--  -->
+	<package name="snews" namespace="/" extends="struts-default">
+		<action name="snews" class="com.dist.action.SnewsAction" method="update">
+			<result name="gotolist" type="redirect">/snews!detail.action?news.id=${news.getId()}</result>
+		</action>		
+	</package>
+
+  
+	<package name="json" namespace="/" extends="json-default,struts-default">
+		<global-results>
+			<result type="json"></result>
+		</global-results>
+	</package>
+
+	<!-- 与手机终端通讯模块 等  如果添加了default拦截器，那么用户必须登录以后才能调用接口 -->
+	<package name="mobile" namespace="/mobile" extends="json-default">
+	
+			<!-- mobile  action的中转 -->
+		<action name="app-*" class="android.mobile.mytest.MobileFunctionAction"
+			method="{1}">
+			<result type="json"></result>
+		</action>
+
+		<!-- APP应用程序大类注册页面 -->
+		<action name="regApp" class="com.dist.action.ApplicationsAction"
+			method="save">
+			<interceptor-ref name="fileUpload">
+				<param name="maximumSize">40960000</param>
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack" />
+			<result name="success">/regappplatform.jsp</result>
+		</action>
+
+
+		<!-- APP应用程序具体操作系统的APP注册页面 -->
+		<action name="regAppPlatform" class="com.dist.action.ApplicationPlatformAction"
+			method="save">
+			<interceptor-ref name="fileUpload">
+				<param name="maximumSize">40960000</param>
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack" />
+			<result name="success">/index.html</result>
+		</action>
+
+
+		<!--添加新闻信息 -->
+		<action name="addNews" class="com.dist.action.SnewsAction"
+			method="save">
+			<interceptor-ref name="fileUpload">
+				<param name="maximumSize">40960000</param>
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack" />
+			<result name="success">/index.html</result>
+		</action>
+
+
+		<action name="directTest" class="android.mobile.mytest.DirectTest">
+			<result name="success">/WEB-INF/template/admin/user.jsp</result>
+		</action>
+
+
+        <!-- 朋友圈添加信息 -->
+		<action name="addInfo" class="android.mobile.mytest.PlanCircleUploadAction"
+			method="add">
+			<!-- 动态设置savePath的属性值 -->
+			<param name="savePath">/image</param>
+			<result type="json"></result>
+		</action>
+
+
+
+        <!-- 用户修改头像 -->
+		<action name="updateUserImg" class="android.mobile.mytest.PlanCircleUploadAction"
+			method="upUserImg">
+			<!-- 动态设置savePath的属性值 -->
+			<param name="savePath">/image</param>
+			<result type="json"></result>
+		</action>
+
+	</package>
+
+
+
+
+
+
+
+
+
+
+
+</struts>

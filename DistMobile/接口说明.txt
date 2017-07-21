@@ -1,0 +1,137 @@
+	
+	
+	DistApp.serverAbsolutePath=192.168.9.108:8080/DistMobile
+	
+	1、用户反馈：
+	url  ：DistApp.serverAbsolutePath + "/mobile/app-feedBack.action"     参数  userId 、content、appidentify（设备唯一识别号）
+	2、保存用户订阅的消息设置到服务器数据库sourceId 
+	
+	url  ：DistApp.serverAbsolutePath + "/mobile/app-setSubscribe.action"  参数 userID     [{"id":"3","state":true},{"id":"2","state":true},{"id":"5","state":false},{"id":"4","state":true}]
+	
+	3、 获取所有订阅列表及用户的订阅状态 参数 userID
+	url： DistApp.serverAbsolutePath + "/mobile/app-userScriSourceList.action";   参数   userId
+	
+	14、 根据用户的订阅权限显示相应的订阅通知
+	url = DistApp.serverAbsolutePath+"/mobile/app-newsListByUser.action";     参数 userId
+	
+	4、设备验证
+	DistApp.serverAbsolutePath + "/mobile/app-mobileDeviceValidate.action   参数   deviceNumber
+	
+	5、设备注册
+	DistApp.serverAbsolutePath + "/mobile/app-mobileDeviceReg.action";    参数    remark   deviceNumber  name    system(操作系统)  hardware（硬件类型）    
+	/ 设备Status状态0表示待审核，1表示正常 。 2表示挂失，3表示禁用
+	
+	6、用户登录   
+	DistApp.serverAbsolutePath+"/mobile/app-mobileLogin.action";    
+	参数   userId 、  deviceNumber 、deviceName 、 loginName、   password 、  action=login 、  appidentify=com.dist.iportal
+	 // 返回：0待审核；1正常；2挂失；3禁用；             state true说明用户登录成功    false 密码等错误，登录失败
+	 
+	 
+	 
+	7、终端用户退出登录  
+	url = DistApp.serverAbsolutePath+"/mobile/app-mobileLog.action";    
+	参数   deviceNumber 、action=exit 、appidentify= com.dist.iportal、userId 
+	
+	
+	
+	8、 规划圈        动态信息点赞
+	url = DistApp.serverAbsolutePath+"/mobile/app-commentPraise.action";     参数 snsId
+	
+	
+	
+	9、新闻阅读数目记录
+	url = DistApp.serverAbsolutePath+"/mobile/app-newsPraise.action";     参数 newsId
+	
+	
+	10、 规划圈        动态信息 获取某条信息的评论列表
+	url = DistApp.serverAbsolutePath+"/mobile/app-commentList.action";     参数 snsId
+	
+	
+	11、 规划圈        动态信息 添加评论
+	url = DistApp.serverAbsolutePath+"/mobile/app-addComment.action";     参数 content  userId  commentId（如果是评论的评论则不为null）、snsId
+	
+	
+	12、 规划圈       	 * 显示规划圈动态信息
+	url = DistApp.serverAbsolutePath+"/mobile/app-snsList.action";  
+	
+	
+	17、 规划圈       	 *添加新的规划动态信息
+	url = D DistApp.serverAbsolutePath + "/mobile/addInfo!add.action"   参数 userId   、content 、fileName 、  file 
+//  formfile = new FormFile(file.getName(), file, "image",   "application/octet-stream");
+	
+	
+	13、  获取所有的终端新闻通知信息
+	url = DistApp.serverAbsolutePath+"/mobile/app-newsList.action";  
+	
+
+	
+	15、根据设备类型       获取用户的应用列表  
+	url： DistApp.serverAbsolutePath + "/mobile/app-appListByOSType.action";   参数   deviceType=（IOS或Android或Web）
+	
+	
+	
+	
+   18、用户头像上传
+	url：  DistApp.serverAbsolutePath    + "/mobile/updateUserImg!upUserImg.action";	 参数 userId   、 fileName 、  file 
+	
+	
+	
+	
+	
+	19、根据用户ID       获取用户的应用列表  
+	url： DistApp.serverAbsolutePath + "/mobile/app-appListByUserID.action";   参数   userId
+	
+	
+	
+	
+	20、新闻通知详情
+	DistApp.serverAbsolutePath+"/snews!mobileNewsdetail.action?news.id="+
+	
+	
+	
+	
+	
+	
+	
+	
+	    public static String appIconPath = serverAbsolutePath+"/appIcon/appIcon/";  // 应用列表根路径 
+    public static String planCirclePath = serverAbsolutePath+"/appIcon/planCircleIcon/";  // 规划圈缩略图
+    public static String planCirclePath_origin = serverAbsolutePath+"/appIcon/origin_planCircleIcon/";  //规划圈原始图 
+                                                            information.getConentImage().get(0).getPicpath().toString()+".jpg"
+    public static String userImagePath = serverAbsolutePath+"/appIcon/userIcon/";  //头像缩略图
+//    public static String newImagePath = serverAbsolutePath+"/appIcon/newsIcon/";  //新闻通知缩略图
+															information.getImage().get(0).getPath().toString()
+//    public static String newImagePath_origin = serverAbsolutePath+"/appIcon/origin_newsIcon/";  //新闻通知原始图
+    public static String appPath = serverAbsolutePath+"/appIcon/upload/";  //应用程序下载地址
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

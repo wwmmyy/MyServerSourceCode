@@ -1,0 +1,186 @@
+	http://localhost:8080/DistMobile/jsonDemo!login.action
+	
+	http://localhost:8080/DistMobile/jsonDemo!androidJson.action
+	http://localhost:8080/DistMobile/jsonDemo!login.action
+	//根据配置文件会跳转到 test.jsp
+	http://localhost:8080/DistMobile/test.action
+	http://localhost:8080/DistMobile/jsonDemo!goView.action
+	
+	http://localhost:8080/DistMobile/user!list.action
+	http://localhost:8080/DistMobile/role!list.action
+	
+	http://localhost:8080/DistMobile/device!list.action
+	http://localhost:8080/DistMobile/device!deviceService.action?type=register
+	
+	
+	http://localhost:8080/DistMobile/mobile/userList.action
+	
+	http://localhost:8080/DistMobile/admin/user!list.action
+	
+	http://localhost:8080/DistMobile/services/userServiceImpl?wsdl
+	
+	http://localhost:8080/DistMobile/mobile/directTest.action
+	
+	
+	
+	
+	http://localhost:8080/DistMobile/servlet/TestServlet
+	
+	http://localhost:8080/DistMobile/druid
+	
+	有三种方法action跳转处理，并指定所对应页面
+	
+	（1）默认配置      
+	如 调用 com.dist.action 中UserAction.java  list方法   
+	访问路径为：http://localhost:8080/DistMobile/user!list.action   对应的网页为：/WEB-INF/template/user_list.jsp
+	访问路径为：http://localhost:8080/DistMobile/admin/user!list.action   对应的网页为：/WEB-INF/template/admin/user_list.jsp
+	
+	（2）在struts.xml中手动配置package action 及跳转页面
+	
+	（3）通过@Action注释 
+	详见UserAction.java   method2
+	
+	
+	
+	
+	
+	
+	sql 查询的时候，表名应该换用类名称
+	
+	
+	
+	
+	
+	
+	
+	1.访问路径 
+	
+	
+	
+	
+	
+	2、
+	
+	
+	
+	为了上层接口规范，需要把UserDao改为UserDaoI    BaseDao改为泛型
+	
+	
+	
+	2015-04-07放到了SVN，工程名称已改为DistMobile
+
+	
+	
+	
+	
+	
+		<!-- 数据源配置 -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<!-- 设置JDBC驱动名称 -->
+		<property name="driverClassName" value="${jdbc.driver}" />
+		<!-- 设置JDBC连接URL -->
+		<property name="url" value="${jdbc.url}" />
+		<!-- 设置数据库用户名 -->
+		<property name="username" value="${jdbc.username}" />
+		<!-- 设置数据库密码 -->
+		<property name="password" value="${jdbc.password}" />
+		<!-- 设置连接池初始值 -->
+		<property name="initialSize" value="5" />
+		<!-- 设置连接池最大值 -->
+		<property name="maxActive" value="100" />
+		<!-- 设置连接池最小空闲值 -->
+		<property name="minIdle" value="20" />
+		<!-- 设置连接池最大空闲值 -->
+		<property name="maxIdle" value="50" />
+	</bean>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+数据库 更改   
+
+
+表：sapplication   icon  varchar(50)----varchar(500)-
+此外 添加了identify   app包名varchar(100)
+此外 添加了url   app包名varchar(300)
+
+appicon 的名称是根据identify值+图片格式
+如果identify值为空，则以当前时间为名称命名
+
+
+在app移动端，点击应用图标时，首先 根据identify判断是否已经安装了该软件，如果按转了则跳转到该应用，
+若没有安装则根据url跳转到网页
+
+
+
+
+
+
+
+
+
+ getRedirectStrategy().sendRedirect(request, response, targetUrl);
+
+
+
+
+
+
+
+
+
+
+
+
+	model层采用主外键关联生成最新的表
+
+
+
+	
+	（1）实现用户登录验证，有三种方式，
+	 1、拦截以.jsp结尾的方位,若不符合要求，则让其跳转到登录页面，但无法拦截action的访问
+	    com.dist.common.LoginFilter.java   同时在web.xml中需要对应的配置
+	      <!-- 登录验证拦截器   此种方式只能拦截格式为jsp的url访问 -->
+			 	 <filter>
+					<filter-name>loginFilter</filter-name>
+					<filter-class>com.dist.common.LoginFilter</filter-class>
+				</filter>
+				<filter-mapping>
+					<filter-name>loginFilter</filter-name>
+					<url-pattern>*.jsp</url-pattern>
+				</filter-mapping>
+	    
+	    
+	 2、在每个action跳转过后的jsp中，添加js获取用户session 登录信息，若不存在跳转到登录界面
+	 
+	 3、添加一个拦截器，对于用户的每一次访问都要验证登录session ，若不存在则。。。。	 
+		com.dist.common.MyInterceptor.java  同时咋struts.xml中也有对应的配置声明。
+		此方法的缺陷就是由于目前采用spring的自动扫描和注解，
+
+                   经测试，发现第三种方法可用，因此暂时抛弃前两种方法
+	      <interceptors>  
+               <!--定义一个名为authority的拦截器-->  
+               <interceptor  
+                   class="com.dist.common.AuthorityInterceptor"  
+                   name="authority"/>  
+               <!--定义一个包含权限检查的拦截器栈-->  
+               <interceptor-stack name="mydefault">  
+                   <!--配置内建默认拦截器-->  
+                   <interceptor-ref name="defaultStack"/>  
+                   <!--配置自定义的拦截器-->  
+                   <interceptor-ref name="authority"/>  
+               </interceptor-stack>  
+           </interceptors>  
+           <default-interceptor-ref name="mydefault" /> 
+	
+	
+
+
+
+
+
+

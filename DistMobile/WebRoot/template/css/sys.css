@@ -1,0 +1,24 @@
+body{ font-family:'Î¢ÈíÑÅºÚ';padding-top: 50px;}
+.dist-navbar{background-color:#073648;}
+#logo{font-size:24px; font-weight:bold;}
+#navbar-collapse li{min-width:100px;text-align:center;}
+.dist_workspace{margin:0px; padding:0px; width:auto}
+.nav-header{text-indent:8px; height:25px; line-height:25px; font-weight:bold;}
+.nav .active{ background-color:#0088cc;}
+.nav .active a{color:White !important;}
+
+.dist-sidenav{margin:20px 0px auto 20px;}
+
+.page-top{height:40px; margin-top:5px; padding:0px 20px; border-bottom:solid 1px #ccc;}
+
+th,td{text-align:center; font-size:14px;}
+td{ font-size:12px;}
+.green{color:Green}
+.red{color:Red}
+
+#app-container{margin:10px;}
+#app-container .app-item{width:130px; text-decoration:none; display:block; height:150px; -moz-border-radius: 5px;border-radius: 5px; border:solid 1px #ccc; cursor:pointer; margin:10px; float:left;}
+
+.app-item .icon{width:100px; height:100px; background-position:center; background-repeat:no-repeat; margin:10px;-moz-background-size:100% 100%;background-size:100% 100%; }
+.app-item:hover{background-color:#e8e8e8;}
+.app-item .text{height:26px; line-height:25px; font-size:12px; border-top:solid 1px #ccc; text-align:center}

@@ -1,0 +1,47 @@
+* { font-family: "微软雅黑","HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+.navbar-default{margin-bottom:0px;}
+.navbar-default .navbar-brand{color:White}
+.navbar-default .navbar-brand:hover{color:White}
+.navbar-default{background-color:#428bca}
+.sidebar{background-color:White; padding-top:3px;}
+.dist-white{color:White }
+.dist-white .badge{background-color:White; color:Black}
+/* 3. Sidebar
+------------------------------------------------------*/
+
+
+.dist-sidebar-menu > li > a {
+    display: block;
+    position: relative;
+    margin: 0;
+    border: 0px;
+    padding: 20px 15px;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 300;
+    color:#000;
+}
+
+.sidebar ul li a.active {
+    background-color: #428bca;
+    color:White;
+}
+.sidebar ul li ul li a.active
+{
+	background-color: #dedcdc;
+    color:#000000;
+}
+
+.navbar-default .navbar-toggle .icon-bar{background-color:White}
+.dist-breadcrumb-container{margin:20px auto;}
+
+th,td{text-align:center; font-size:14px;}
+td{ font-size:12px;}
+.page-header{margin:10px; font-size:16px;color:#1c75ad;}
+.green{color:Green}
+.red{color:Red}
+.selectUser{font-size:12px;margin:5px;min-width:45px;}
+
+.breadcrumb li.active a{color:gray}
+��column-item{border-bottom:solid 1px #ccc;font-size:14px;}
+��column-item button{float:rigth;}

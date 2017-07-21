@@ -1,0 +1,32 @@
+.loginPage{
+	background-color:#F5F5F5;
+	height:700px;
+	width:100%;
+}
+
+.loginBlock{
+	height:390px;
+	width:350px;
+	background-color:white;
+	margin:100px auto;
+	color: #848585;
+}
+
+.loginTitle{
+	height:50px;
+	width:100%;
+	background-color:#F5F5F5;
+	font-size: 24px;
+	font-weight: bold;
+	color: #073648;
+	word-break: break-all;
+	text-align:center;
+	line-height:24px;
+}
+
+.loginContent{
+	height:340px;
+	padding:50px 50px;
+	border:1px solid #EAEAEA;
+}
+
